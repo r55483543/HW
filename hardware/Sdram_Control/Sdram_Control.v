@@ -33,7 +33,8 @@ module Sdram_Control(
         WE_N,
         DQ,
         DQM,
-		  SDR_CLK
+		  SDR_CLK,
+		  FPGA_SDRAM_OE
         );
 
 
@@ -73,6 +74,7 @@ output                          WE_N;                   //SDRAM write enable
 inout   [`DSIZE-1:0]            DQ;                     //SDRAM data bus
 output  [`DSIZE/8-1:0]          DQM;                    //SDRAM data mask lines
 output							     SDR_CLK;				//SDRAM clock
+output								  FPGA_SDRAM_OE;
 //	Internal Registers/Wires
 //	Controller
 reg		[`ASIZE-1:0]			  mADDR;					//Internal address
@@ -114,6 +116,7 @@ wire                            ICKE;                   //SDRAM clock enable
 wire                            IRAS_N;                 //SDRAM Row address Strobe
 wire                            ICAS_N;                 //SDRAM Column address Strobe
 wire                            IWE_N;                  //SDRAM write enable
+wire									  FPGA_SDRAM_OE;
 //	FIFO Control
 reg								OUT_VALID;				//Output data request to read side fifo
 reg								IN_REQ;					//Input	data request to write side fifo
@@ -255,6 +258,7 @@ end
 
 assign  DQ = oe ? DQOUT : `DSIZE'hzzzz;
 assign	active	=	Read | Write;
+assign FPGA_SDRAM_OE = oe;
 
 always@(posedge CLK or negedge RESET_N)
 begin

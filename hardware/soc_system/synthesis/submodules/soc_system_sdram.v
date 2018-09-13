@@ -179,7 +179,8 @@ module soc_system_sdram (
                            zs_dq,
                            zs_dqm,
                            zs_ras_n,
-                           zs_we_n
+                           zs_we_n,
+									hps_sdram_oe
                         )
 ;
 
@@ -203,6 +204,7 @@ module soc_system_sdram (
   input            az_wr_n;
   input            clk;
   input            reset_n;
+  output				 hps_sdram_oe;
 
 
 wire    [ 23: 0] CODE;
@@ -270,6 +272,8 @@ wire    [ 15: 0] zs_dq;
 wire    [  1: 0] zs_dqm;
 wire             zs_ras_n;
 wire             zs_we_n;
+wire				  hps_sdram_oe;
+  assign hps_sdram_oe = oe;
   assign clk_en = 1;
   //s1, which is an e_avalon_slave
   assign {zs_cs_n, zs_ras_n, zs_cas_n, zs_we_n} = m_cmd;

@@ -107,7 +107,9 @@ module soc_system (
 		inout  wire [15:0] sdram_wire_dq,                              //                                    .dq
 		output wire [1:0]  sdram_wire_dqm,                             //                                    .dqm
 		output wire        sdram_wire_ras_n,                           //                                    .ras_n
-		output wire        sdram_wire_we_n                             //                                    .we_n
+		output wire        sdram_wire_we_n,                             //                                    .we_n
+		output wire			 hps_sdram_wire_oe,
+		input  wire			 f2h_reset_n
 	);
 
 	wire          alt_vip_vfr_0_avalon_streaming_source_valid;            // alt_vip_vfr_0:dout_valid -> alt_vip_mix_0:din_2_valid
@@ -697,7 +699,7 @@ module soc_system (
 
 	soc_system_sdram sdram (
 		.clk            (pll_sdram_outclk1_clk),                    //   clk.clk
-		.reset_n        (~rst_controller_001_reset_out_reset),      // reset.reset_n
+		.reset_n        (f2h_reset_n),      // reset.reset_n
 		.az_addr        (mm_interconnect_0_sdram_s1_address),       //    s1.address
 		.az_be_n        (~mm_interconnect_0_sdram_s1_byteenable),   //      .byteenable_n
 		.az_cs          (mm_interconnect_0_sdram_s1_chipselect),    //      .chipselect
@@ -715,7 +717,8 @@ module soc_system (
 		.zs_dq          (sdram_wire_dq),                            //      .export
 		.zs_dqm         (sdram_wire_dqm),                           //      .export
 		.zs_ras_n       (sdram_wire_ras_n),                         //      .export
-		.zs_we_n        (sdram_wire_we_n)                           //      .export
+		.zs_we_n        (sdram_wire_we_n),                           //      .export
+		.hps_sdram_oe	 (hps_sdram_wire_oe)
 	);
 
 	soc_system_timing_adapter_0 timing_adapter_0 (

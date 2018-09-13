@@ -330,7 +330,8 @@ soc_system u0 (
         .sdram_wire_dqm                            ({HPS_DRAM_UDQM,HPS_DRAM_LDQM} ),                            //                               .dqm
         .sdram_wire_ras_n                          (HPS_DRAM_RAS_N ),                          //                               .ras_n
         .sdram_wire_we_n                           (HPS_DRAM_WE_N),                           //                               .we_n
-        .alt_vip_itc_0_clocked_video_vid_clk       (clk_148_5 ),       //    alt_vip_itc_0_clocked_video.vid_clk
+        .hps_sdram_wire_oe									(HPS_DRAM_WIRE_OE),
+		  .alt_vip_itc_0_clocked_video_vid_clk       (clk_148_5 ),       //    alt_vip_itc_0_clocked_video.vid_clk
         .alt_vip_itc_0_clocked_video_vid_data      ({VGA_R,VGA_G,VGA_B} ),      //                               .vid_data
         .alt_vip_itc_0_clocked_video_underflow     ( ),     //                               .underflow
         .alt_vip_itc_0_clocked_video_vid_datavalid ( ), //                               .vid_datavalid
@@ -347,7 +348,8 @@ soc_system u0 (
 			.pio_chaos_x_external_connection_export			( CODE_X),     //     pio_chaos_x_external_connection.export
 			.pio_chaos_y_external_connection_export			( CODE_Y),     //     pio_chaos_y_external_connection.export
 			.pio_chaos_z_external_connection_export			( CODE_Z),     //     pio_chaos_z_external_connection.export
-			.pio_chaos_temp_external_connection_export		( F2H)
+			.pio_chaos_temp_external_connection_export		( F2H),
+			.f2h_reset_n(test_h2f_reset_n)
 	 );
 assign  VGA_CLK=clk_148_5;	 
 assign  VGA_SYNC_N=1'b0;	 
@@ -378,6 +380,7 @@ wire             HPS_DRAM_LDQM;
 wire             HPS_DRAM_RAS_N;
 wire             HPS_DRAM_UDQM;
 wire             HPS_DRAM_WE_N;
+wire				  HPS_DRAM_WIRE_OE;
 
 wire      [12:0] FPGA_DRAM_ADDR;
 wire      [1:0]  FPGA_DRAM_BA;
@@ -389,7 +392,8 @@ tri      [15:0] FPGA_DRAM_DQ;
 wire             FPGA_DRAM_LDQM;
 wire             FPGA_DRAM_RAS_N;
 wire             FPGA_DRAM_UDQM;
-wire             FPGA_DRAM_WE_N;		
+wire             FPGA_DRAM_WE_N;
+wire				  FPGA_DRAM_WIRE_OE;		
 
 Sdram_Control	u1	(	//	HOST Side
 						   .REF_CLK(CLOCK_50),
@@ -420,7 +424,8 @@ Sdram_Control	u1	(	//	HOST Side
 				         .WE_N(FPGA_DRAM_WE_N),
 						   .DQ(FPGA_DRAM_DQ),
 				         .DQM({FPGA_DRAM_UDQM,FPGA_DRAM_LDQM}),
-							.SDR_CLK(FPGA_DRAM_CLK)	);
+							.SDR_CLK(FPGA_DRAM_CLK),
+							.FPGA_SDRAM_OE(FPGA_DRAM_WIRE_OE));
 
 wire  test_software_reset_n;
 wire  test_global_reset_n;
@@ -429,6 +434,7 @@ wire  test_encrypt;
 wire  test_decrypt;
 wire [1:0] AES_DONE;
 wire test_sdram_hps;
+wire test_h2f_reset_n;
 
  RW_Test u2(
       .iCLK(clk_test),
@@ -459,11 +465,12 @@ assign test_start_n = H2F[2];				//1 0 1
 assign test_decrypt = H2F[3];
 assign test_encrypt = H2F[4];
 assign test_sdram_hps = H2F[5];
+assign test_h2f_reset_n = H2F[6];
 assign F2H[3] = AES_DONE[0];
 assign F2H[4] = AES_DONE[1];
 
 /*
-assign DRAM_DQ = test_sdram_hps ? (HPS_DRAM_WE_N?{16{1'bz}}:HPS_DRAM_DQ_OUT) : (FPGA_DRAM_WE_N?{16{1'bz}}:FPGA_DRAM_DQ_OUT);
+assign DRAM_DQ = test_sdram_hps ? (HPS_DRAM_WE_N?16'hzzzz:HPS_DRAM_DQ_OUT) : (FPGA_DRAM_WE_N?16'hzzzz:FPGA_DRAM_DQ_OUT);
 assign DRAM_ADDR = test_sdram_hps ? HPS_DRAM_ADDR : FPGA_DRAM_ADDR;
 assign DRAM_BA = test_sdram_hps ? HPS_DRAM_BA : FPGA_DRAM_BA;
 assign DRAM_CAS_N = test_sdram_hps ? HPS_DRAM_CAS_N : FPGA_DRAM_CAS_N;
@@ -489,42 +496,42 @@ assign DRAM_RAS_N = !H2F[5] ? HPS_DRAM_RAS_N : FPGA_DRAM_RAS_N;
 assign DRAM_UDQM = !H2F[5] ? HPS_DRAM_UDQM : FPGA_DRAM_UDQM;
 assign DRAM_WE_N = H2F[5] ? HPS_DRAM_WE_N : FPGA_DRAM_WE_N;
 */
-assign HPS_DRAM_DQ = !H2F[5] ? (HPS_DRAM_WE_N? DRAM_DQ:{16{1'bz}}) : {16{1'bz}};
-assign DRAM_DQ = !H2F[5] ? (HPS_DRAM_WE_N ? {16{1'bz}}:HPS_DRAM_DQ) : {16{1'bz}};
-assign DRAM_ADDR = !H2F[5] ? HPS_DRAM_ADDR : {16{1'bz}};
-assign DRAM_BA = !H2F[5] ? HPS_DRAM_BA : {16{1'bz}};
-assign DRAM_CAS_N = !H2F[5] ? HPS_DRAM_CAS_N : {16{1'bz}};
-assign DRAM_CKE = !H2F[5] ? HPS_DRAM_CKE : {16{1'bz}};
-assign DRAM_CLK = !H2F[5] ? HPS_DRAM_CLK : {16{1'bz}};
-assign DRAM_CS_N = !H2F[5] ? HPS_DRAM_CS_N : {16{1'bz}};
-assign DRAM_LDQM = !H2F[5] ? HPS_DRAM_LDQM : {16{1'bz}};
-assign DRAM_RAS_N = !H2F[5] ? HPS_DRAM_RAS_N : {16{1'bz}};
-assign DRAM_UDQM = !H2F[5] ? HPS_DRAM_UDQM : {16{1'bz}};
-assign DRAM_WE_N = !H2F[5] ? HPS_DRAM_WE_N : {16{1'bz}};
+assign HPS_DRAM_DQ = !H2F[5] ? (HPS_DRAM_WIRE_OE? 16'hzzzz:DRAM_DQ) : 16'hzzzz;
+assign DRAM_DQ = !H2F[5] ? (HPS_DRAM_WIRE_OE ? HPS_DRAM_DQ:16'hzzzz) : 16'hzzzz;
+assign DRAM_ADDR = !H2F[5] ? HPS_DRAM_ADDR : 16'hzzzz;
+assign DRAM_BA = !H2F[5] ? HPS_DRAM_BA : 16'hzzzz;
+assign DRAM_CAS_N = !H2F[5] ? HPS_DRAM_CAS_N : 16'hzzzz;
+assign DRAM_CKE = !H2F[5] ? HPS_DRAM_CKE : 16'hzzzz;
+assign DRAM_CLK = !H2F[5] ? HPS_DRAM_CLK : 16'hzzzz;
+assign DRAM_CS_N = !H2F[5] ? HPS_DRAM_CS_N : 16'hzzzz;
+assign DRAM_LDQM = !H2F[5] ? HPS_DRAM_LDQM : 16'hzzzz;
+assign DRAM_RAS_N = !H2F[5] ? HPS_DRAM_RAS_N : 16'hzzzz;
+assign DRAM_UDQM = !H2F[5] ? HPS_DRAM_UDQM : 16'hzzzz;
+assign DRAM_WE_N = !H2F[5] ? HPS_DRAM_WE_N : 16'hzzzz;
 
 
-assign FPGA_DRAM_DQ = H2F[5] ? (FPGA_DRAM_WE_N? DRAM_DQ:{16{1'bz}}) : {16{1'bz}};
-assign DRAM_DQ = H2F[5] ? FPGA_DRAM_DQ : {16{1'bz}};
-assign DRAM_ADDR = H2F[5] ? FPGA_DRAM_ADDR : {16{1'bz}};
-assign DRAM_BA = H2F[5] ? FPGA_DRAM_BA : {16{1'bz}};
-assign DRAM_CAS_N = H2F[5] ? FPGA_DRAM_CAS_N : {16{1'bz}};
-assign DRAM_CKE = H2F[5] ? FPGA_DRAM_CKE : {16{1'bz}};
-assign DRAM_CLK = H2F[5] ? FPGA_DRAM_CLK : {16{1'bz}};
-assign DRAM_CS_N = H2F[5] ? FPGA_DRAM_CS_N : {16{1'bz}};
-assign DRAM_LDQM = H2F[5] ? FPGA_DRAM_LDQM : {16{1'bz}};
-assign DRAM_RAS_N = H2F[5] ? FPGA_DRAM_RAS_N : {16{1'bz}};
-assign DRAM_UDQM = H2F[5] ? FPGA_DRAM_UDQM : {16{1'bz}};
-assign DRAM_WE_N = H2F[5] ? FPGA_DRAM_WE_N : {16{1'bz}};
+assign FPGA_DRAM_DQ = H2F[5] ? (FPGA_DRAM_WIRE_OE? 16'hzzzz:DRAM_DQ) : 16'hzzzz;
+assign DRAM_DQ = H2F[5] ? (FPGA_DRAM_WIRE_OE ? FPGA_DRAM_DQ:16'hzzzz) : 16'hzzzz;
+assign DRAM_ADDR = H2F[5] ? FPGA_DRAM_ADDR : 16'hzzzz;
+assign DRAM_BA = H2F[5] ? FPGA_DRAM_BA : 16'hzzzz;
+assign DRAM_CAS_N = H2F[5] ? FPGA_DRAM_CAS_N : 16'hzzzz;
+assign DRAM_CKE = H2F[5] ? FPGA_DRAM_CKE : 16'hzzzz;
+assign DRAM_CLK = H2F[5] ? FPGA_DRAM_CLK : 16'hzzzz;
+assign DRAM_CS_N = H2F[5] ? FPGA_DRAM_CS_N : 16'hzzzz;
+assign DRAM_LDQM = H2F[5] ? FPGA_DRAM_LDQM : 16'hzzzz;
+assign DRAM_RAS_N = H2F[5] ? FPGA_DRAM_RAS_N : 16'hzzzz;
+assign DRAM_UDQM = H2F[5] ? FPGA_DRAM_UDQM : 16'hzzzz;
+assign DRAM_WE_N = H2F[5] ? FPGA_DRAM_WE_N : 16'hzzzz;
 
-assign LEDR[0] = ~H2F[5];
-assign LEDR[1] = ~H2F[5];
-assign LEDR[2] = ~H2F[5];
-assign LEDR[3] = ~H2F[5];
-assign LEDR[4] = ~H2F[5];
+assign LEDR[0] = H2F[0];
+assign LEDR[1] = H2F[1];
+assign LEDR[2] = H2F[2];
+assign LEDR[3] = H2F[3];
+assign LEDR[4] = H2F[4];
 assign LEDR[5] = H2F[5];
-assign LEDR[6] = H2F[5];
-assign LEDR[7] = H2F[5];
-assign LEDR[8] = H2F[5];
+assign LEDR[6] = H2F[6];
+assign LEDR[7] = F2H[3];
+assign LEDR[8] = F2H[4];
 assign LEDR[9] = H2F[5];
 
 /*
