@@ -1,5 +1,5 @@
 Assembler report for DE1_SOC_golden_top
-Thu Sep 13 22:06:47 2018
+Fri Oct 05 01:26:11 2018
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Standard Edition
 
 
@@ -39,7 +39,7 @@ agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Sep 13 22:06:47 2018 ;
+; Assembler Status      ; Successful - Fri Oct 05 01:26:11 2018 ;
 ; Revision Name         ; DE1_SOC_golden_top                    ;
 ; Top-level Entity Name ; DE1_SOC_golden_top                    ;
 ; Family                ; Cyclone V                             ;
@@ -81,8 +81,8 @@ agreement for further details.
 ; Option         ; Setting                                                                                        ;
 +----------------+------------------------------------------------------------------------------------------------+
 ; Device         ; 5CSXFC6D6F31C6                                                                                 ;
-; JTAG usercode  ; 0x03E67E33                                                                                     ;
-; Checksum       ; 0x03E67E33                                                                                     ;
+; JTAG usercode  ; 0x0B07B574                                                                                     ;
+; Checksum       ; 0x0B07B574                                                                                     ;
 +----------------+------------------------------------------------------------------------------------------------+
 
 
@@ -92,7 +92,7 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 16.1.0 Build 196 10/24/2016 SJ Standard Edition
-    Info: Processing started: Thu Sep 13 22:06:27 2018
+    Info: Processing started: Fri Oct 05 01:25:44 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off DE1_SOC_golden_top -c DE1_SOC_golden_top
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
@@ -101,9 +101,9 @@ Warning (210042): Can't convert time-limited SOF into POF, HEX File, TTF, or RBF
 Info (210040): SRAM Object File D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/DE1_SOC_golden_top_time_limited.sof contains time-limited megafunction that supports OpenCore Plus feature -- Vendor: 0x6AF7, Product: 0x00B5
 Info (11878): Hard Processor Subsystem configuration has not changed and a Preloader software update is not required
 Info: Quartus Prime Assembler was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 921 megabytes
-    Info: Processing ended: Thu Sep 13 22:06:48 2018
-    Info: Elapsed time: 00:00:21
-    Info: Total CPU time (on all processors): 00:00:21
+    Info: Peak virtual memory: 1004 megabytes
+    Info: Processing ended: Fri Oct 05 01:26:11 2018
+    Info: Elapsed time: 00:00:27
+    Info: Total CPU time (on all processors): 00:00:28
 
 

@@ -124,6 +124,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "LEDR[7]",
+					"strict" : false
+				},
+				{
 					"name" : "LEDR[8]",
 					"strict" : false
 				},

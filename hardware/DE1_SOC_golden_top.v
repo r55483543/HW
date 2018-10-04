@@ -401,17 +401,17 @@ Sdram_Control	u1	(	//	HOST Side
 							//	FIFO Write Side 
 						   .WR_DATA(writedata),
 							.WR(write),
-							.WR_ADDR(/*25'h500000*/25'hA00000-25'h8),
-							.WR_MAX_ADDR(25'hA00000+25'h80000),		//	525-18
+							.WR_ADDR(25'h0),
+							.WR_MAX_ADDR(25'h0+25'h80000),		//	525-18
 							.WR_LENGTH(9'h8),
 							.WR_LOAD(!test_global_reset_n ),
 							.WR_CLK(clk_test),
 							//	FIFO Read Side 
 						   .RD_DATA(readdata),
 				        	.RD(read),
-				        	.RD_ADDR(25'h500000),			//	Read odd field and bypess blanking
-							.RD_MAX_ADDR(25'h500000+25'h80000),
-							.RD_LENGTH(9'h128),
+				        	.RD_ADDR(25'h0),			//	Read odd field and bypess blanking
+							.RD_MAX_ADDR(25'h0+25'h80000),
+							.RD_LENGTH(9'h100),
 				        	.RD_LOAD(!test_global_reset_n ),
 							.RD_CLK(clk_test),
                      //	SDRAM Side
@@ -432,6 +432,11 @@ wire  test_global_reset_n;
 wire  test_start_n;
 wire  test_encrypt;
 wire  test_decrypt;
+wire  [15:0]  writedata;
+wire  [15:0]  readdata;
+wire          write;
+wire          read;
+wire          clk_test;
 wire [1:0] AES_DONE;
 wire test_sdram_hps;
 wire test_h2f_reset_n;
@@ -496,6 +501,7 @@ assign DRAM_RAS_N = !H2F[5] ? HPS_DRAM_RAS_N : FPGA_DRAM_RAS_N;
 assign DRAM_UDQM = !H2F[5] ? HPS_DRAM_UDQM : FPGA_DRAM_UDQM;
 assign DRAM_WE_N = H2F[5] ? HPS_DRAM_WE_N : FPGA_DRAM_WE_N;
 */
+/*
 assign HPS_DRAM_DQ = !H2F[5] ? (HPS_DRAM_WIRE_OE? 16'hzzzz:DRAM_DQ) : 16'hzzzz;
 assign DRAM_DQ = !H2F[5] ? (HPS_DRAM_WIRE_OE ? HPS_DRAM_DQ:16'hzzzz) : 16'hzzzz;
 assign DRAM_ADDR = !H2F[5] ? HPS_DRAM_ADDR : 16'hzzzz;
@@ -522,6 +528,20 @@ assign DRAM_LDQM = H2F[5] ? FPGA_DRAM_LDQM : 16'hzzzz;
 assign DRAM_RAS_N = H2F[5] ? FPGA_DRAM_RAS_N : 16'hzzzz;
 assign DRAM_UDQM = H2F[5] ? FPGA_DRAM_UDQM : 16'hzzzz;
 assign DRAM_WE_N = H2F[5] ? FPGA_DRAM_WE_N : 16'hzzzz;
+*/
+assign FPGA_DRAM_DQ = H2F[5] ? (FPGA_DRAM_WIRE_OE? 16'hzzzz:DRAM_DQ) : 16'hzzzz;
+assign HPS_DRAM_DQ = !H2F[5] ? (HPS_DRAM_WIRE_OE? 16'hzzzz:DRAM_DQ) : 16'hzzzz;
+assign DRAM_DQ = !H2F[5] ? (HPS_DRAM_WIRE_OE ? HPS_DRAM_DQ:16'hzzzz) : (FPGA_DRAM_WIRE_OE ? FPGA_DRAM_DQ:16'hzzzz);
+assign DRAM_ADDR = !H2F[5] ? HPS_DRAM_ADDR : FPGA_DRAM_ADDR;
+assign DRAM_BA = !H2F[5] ? HPS_DRAM_BA : FPGA_DRAM_BA;
+assign DRAM_CAS_N = !H2F[5] ? HPS_DRAM_CAS_N : FPGA_DRAM_CAS_N;
+assign DRAM_CKE = !H2F[5] ? HPS_DRAM_CKE : FPGA_DRAM_CKE;
+assign DRAM_CLK = !H2F[5] ? HPS_DRAM_CLK : FPGA_DRAM_CLK;
+assign DRAM_CS_N = !H2F[5] ? HPS_DRAM_CS_N : FPGA_DRAM_CS_N;
+assign DRAM_LDQM = !H2F[5] ? HPS_DRAM_LDQM : FPGA_DRAM_LDQM;
+assign DRAM_RAS_N = !H2F[5] ? HPS_DRAM_RAS_N : FPGA_DRAM_RAS_N;
+assign DRAM_UDQM = !H2F[5] ? HPS_DRAM_UDQM : FPGA_DRAM_UDQM;
+assign DRAM_WE_N = !H2F[5] ? HPS_DRAM_WE_N : FPGA_DRAM_WE_N;
 
 assign LEDR[0] = H2F[0];
 assign LEDR[1] = H2F[1];

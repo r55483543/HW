@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Thu Sep 13 21:59:35 2018
+Analysis & Synthesis Status : Successful - Fri Oct 05 01:17:16 2018
 Quartus Prime Version : 16.1.0 Build 196 10/24/2016 SJ Standard Edition
 Revision Name : DE1_SOC_golden_top
 Top-level Entity Name : DE1_SOC_golden_top
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 14954
+Total registers : 20049
 Total pins : 387
 Total virtual pins : 0
-Total block memory bits : 757,791
+Total block memory bits : 3,527,583
 Total DSP Blocks : 5
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0

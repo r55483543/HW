@@ -161,7 +161,21 @@ begin
 		
 		end
 		
-		11 : c_state <= 4;
+		11 : 
+		begin
+		if(AES_write_count%32 == 8'b1)
+			begin
+				if(wait_count == 8'b1000000)
+				begin
+					wait_count <= 8'b0;
+					c_state <= 4;
+				end
+				else
+					wait_count <= wait_count + 1'b1;
+			end
+		else
+		c_state <= 4;
+		end
 	  	4 : begin //read
 	  			read <= 1;
 			
@@ -241,8 +255,17 @@ begin
 	  		begin
 	  			address <=  {ADDR_W{1'b0}};
 			   c_state <= 9;
-				ld <= 1'b1;
-				AES_rst = 1'b1;
+				if(AES_ed_ENABLE == 2'b10)
+				begin
+					ld <= 1'b1;
+					AES_rst = 1'b1;
+				end
+				else if(AES_ed_ENABLE == 2'b01)
+				begin
+					#1 kld <= 1;
+					ld <= 1'b1;
+					AES_rst = 1'b1;				
+				end
 	  		end
 	  		else
           begin
@@ -258,20 +281,48 @@ begin
 			else if(wait_count == 8'b100)
 				AES_rst = 1'b1;
 			else if(wait_count == 8'b110)
-				ld <= 1'b0;	
-		
-			if(done)
 			begin
-				c_state <= 100;
-				address <=  {ADDR_W{1'b0}};
-				wait_count <= 8'b0;
-				d_data_out <= text_out;
+				if(AES_ed_ENABLE == 2'b10)
+				begin
+				ld <= 1'b0;
+				end
+				else if(AES_ed_ENABLE == 2'b01)
+				begin
+					#1 kld <= 1'b0;
+					ld <= 1'b0;
+				end
 			end
-			else
+			
+			if(AES_ed_ENABLE == 2'b10)
 			begin
-				if(wait_count < 8'b1000)
-					wait_count <= wait_count + 1'b1;		
+				if(e_done)
+				begin
+					c_state <= 100;
+					address <=  {ADDR_W{1'b0}};
+					wait_count <= 8'b0;
+					d_data_out <= e_text_out;
+				end
+				else
+				begin
+					if(wait_count < 8'b1000)
+						wait_count <= wait_count + 1'b1;
+				end
 			end
+			else if(AES_ed_ENABLE == 2'b01)
+			begin
+				if(d_done)
+				begin
+					c_state <= 100;
+					address <=  {ADDR_W{1'b0}};
+					wait_count <= 8'b0;					
+					d_data_out <= d_text_out;
+				end
+				else
+				begin
+					if(wait_count < 8'b1000)
+						wait_count <= wait_count + 1'b1;
+				end
+			end			
 		
 		end
 		100 : c_state <= 101;
@@ -335,7 +386,6 @@ begin
 		      address <=  {ADDR_W{1'b0}};
 				c_state <= 104;
 				AES_write_count <= AES_write_count + 1'b1;
-				iDONE <= 1'b0;
          end
 		else //write the next data
 	  		begin
@@ -348,7 +398,10 @@ begin
 					begin
 					c_state <= 105;
 					writedata <= 16'hffff;
+					if(AES_ed_ENABLE == 2'b10)
 					AES_ed_DONE <= 2'b10;
+					else if(AES_ed_ENABLE == 2'b01)
+					AES_ed_DONE <= 2'b01;
 					end
 				else
 					c_state <= 11;
@@ -370,19 +423,32 @@ end
 
 // Input
 reg ld;
-reg iDONE;
+reg kld;
 // Outputs
-wire done;
-wire [127:0] text_out;
+wire e_done;
+wire d_done;
+wire [127:0] e_text_out;
+wire [127:0] d_text_out;
 
 aes_cipher_top uut (
 	.clk(iCLOCK50), 
 	.rst(AES_rst), 
 	.ld(ld), 
-	.done(done), 
+	.done(e_done), 
 	.key(CHAOS_KEY/*{128{1'b0}}*/), 
 	.text_in(e_data_in), 
-	.text_out(text_out)
+	.text_out(e_text_out)
+);
+
+aes_inv_cipher_top uut1 (
+	.clk(iCLOCK50), 
+	.rst(AES_rst),
+	.kld(kld),
+	.ld(ld), 
+	.done(d_done), 
+	.key(CHAOS_KEY/*{128{1'b0}}*/), 
+	.text_in(e_data_in), 
+	.text_out(d_text_out)
 );
 
 
