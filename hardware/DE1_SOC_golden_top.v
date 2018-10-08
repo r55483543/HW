@@ -401,11 +401,12 @@ Sdram_Control	u1	(	//	HOST Side
 							//	FIFO Write Side 
 						   .WR_DATA(writedata),
 							.WR(write),
-							.WR_ADDR(25'h0),
-							.WR_MAX_ADDR(25'h0+25'h80000),		//	525-18
-							.WR_LENGTH(9'h8),
+							.WR_ADDR(25'h500000),
+							.WR_MAX_ADDR(25'h500000+25'h80000),		//	525-18
+							.WR_LENGTH(9'h100),
 							.WR_LOAD(!test_global_reset_n ),
 							.WR_CLK(clk_test),
+							.WR_USE(writeuse),
 							//	FIFO Read Side 
 						   .RD_DATA(readdata),
 				        	.RD(read),
@@ -414,6 +415,7 @@ Sdram_Control	u1	(	//	HOST Side
 							.RD_LENGTH(9'h100),
 				        	.RD_LOAD(!test_global_reset_n ),
 							.RD_CLK(clk_test),
+							.RD_USE(readuse),
                      //	SDRAM Side
 						   .SA(FPGA_DRAM_ADDR),
 						   .BA(FPGA_DRAM_BA),
@@ -440,6 +442,8 @@ wire          clk_test;
 wire [1:0] AES_DONE;
 wire test_sdram_hps;
 wire test_h2f_reset_n;
+wire [15:0] readuse;
+wire [15:0] writeuse;
 
  RW_Test u2(
       .iCLK(clk_test),
@@ -453,7 +457,9 @@ wire test_h2f_reset_n;
 		.AES_ed_ENABLE({test_encrypt,test_decrypt}),
 		.c_state(),
 		.iCLOCK50(CLOCK_50),
-		.CHAOS_KEY({CODE_X,CODE_Y,CODE_Z,CODE_W})
+		.CHAOS_KEY({CODE_X,CODE_Y,CODE_Z,CODE_W}),
+		.ReadUse(readuse),
+		.WriteUse(writeuse)
 );
 
 pll pll_u0(

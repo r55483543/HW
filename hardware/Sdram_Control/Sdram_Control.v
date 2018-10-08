@@ -213,7 +213,7 @@ Sdram_WR_FIFO 	write_fifo1(
 				.wrusedw(WR_USE),
 				.rdusedw(write_side_fifo_rusedw)
 				);
-				
+/*				
 reg flag;	 
 always@(posedge CLK or negedge RESET_N)
 begin
@@ -221,11 +221,13 @@ begin
  flag	<=	0;
  else
  begin
-  if(write_side_fifo_rusedw==WR_LENGTH)
+  if(write_side_fifo_rusedw==WR_LENGTH || read_side_fifo_wusedw == 0)
   flag	<=	1;
+  else
+  flag 	<= 0;
  end
 end				
-
+*/
 
 Sdram_RD_FIFO 	read_fifo1(
 				.data(mDATAOUT),
@@ -392,7 +394,7 @@ begin
 	begin
 		if( (mWR==0) && (mRD==0) && (ST==0) &&
 			(WR_MASK==0)	&&	(RD_MASK==0) &&
-			(WR_LOAD==0)	&&	(RD_LOAD==0) &&(flag==1) )
+			(WR_LOAD==0)	&&	(RD_LOAD==0) /*&&(flag==1)*/ )
 		begin
 		
 					//	Write Side 
@@ -406,7 +408,7 @@ begin
 				mRD		<=	0;
 			end
 			//	Read Side 
-			else if( (read_side_fifo_wusedw < RD_LENGTH) )
+			else if( (read_side_fifo_wusedw == 0/*< RD_LENGTH*/) )
 			begin
 				mADDR	<=	rRD_ADDR;
 				mLENGTH	<=	RD_LENGTH;

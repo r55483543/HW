@@ -10,7 +10,9 @@ module RW_Test (
 		AES_ed_ENABLE,
 		c_state,
 		iCLOCK50,
-		CHAOS_KEY
+		CHAOS_KEY,
+		ReadUse,
+		WriteUse
 );
 
 parameter      ADDR_W             =     25;
@@ -29,6 +31,8 @@ input	 [DATA_W-1:0]  readdata;
 output [1:0] AES_ed_DONE;	
 input [1:0] AES_ed_ENABLE;
 input iCLOCK50;
+input [15:0] ReadUse;
+input [15:0] WriteUse;
 
 output  [7:0]           c_state;		
 //=======================================================
@@ -79,11 +83,11 @@ begin
 			d_data_out <= {128{1'b0}};
 	  			if (trigger)
 	  		begin
-	  			c_state <= 1;
+	  			c_state <= 10;
 	  		end
 
 	  	end
-	  	1 : begin //write
+/*	  	1 : begin //write
 	  		 
 	  		if (write_count[3])
 	  		begin
@@ -149,7 +153,7 @@ begin
 	  			c_state <= 1;
 	  		end
 		end
-			
+*/			
 		10 : begin 
 		if(wait_count == 8'b1111111)
 		begin
@@ -163,7 +167,7 @@ begin
 		
 		11 : 
 		begin
-		if(AES_write_count%32 == 8'b1)
+/*		if(AES_write_count%32 == 8'b1)
 			begin
 				if(wait_count == 8'b1000000)
 				begin
@@ -173,8 +177,11 @@ begin
 				else
 					wait_count <= wait_count + 1'b1;
 			end
+		else*/
+		if(ReadUse == 0)
+			c_state <= 11;
 		else
-		c_state <= 4;
+			c_state <= 4;
 		end
 	  	4 : begin //read
 	  			read <= 1;
@@ -325,8 +332,14 @@ begin
 			end			
 		
 		end
-		100 : c_state <= 101;
-	  	101 : begin //write
+		100 : 
+		begin
+		if(WriteUse >= 9'h100)
+		c_state <= 100;
+		else
+		c_state <= 101;
+	  	end
+		101 : begin //write
 	  		 
 	  		if (write_count[3])
 	  		begin
