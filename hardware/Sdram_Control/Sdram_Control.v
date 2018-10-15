@@ -307,7 +307,7 @@ begin
 			end
 		default:	
 			begin	
-				if(ST!=SC_CL+SC_RCD+mLENGTH+1)
+				if(ST!=SC_CL+SC_RCD+mLENGTH+1+2)
 				ST<=ST+1;
 				else
 				ST<=0;
@@ -316,9 +316,9 @@ begin
 	
 		if(Read)
 		begin
-			if(ST==SC_CL+SC_RCD+1)
+			if(ST==SC_CL+SC_RCD+1+2)
 			OUT_VALID	<=	1;
-			else if(ST==SC_CL+SC_RCD+mLENGTH+1)
+			else if(ST==SC_CL+SC_RCD+mLENGTH+1+2)
 			begin
 				OUT_VALID	<=	0;
 				Read		<=	0;
