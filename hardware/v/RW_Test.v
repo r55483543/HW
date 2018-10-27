@@ -12,7 +12,9 @@ module RW_Test (
 		iCLOCK50,
 		CHAOS_KEY,
 		ReadUse,
-		WriteUse
+		WriteUse,
+		SDRAM_read,
+		SDRAM_write
 );
 
 parameter      ADDR_W             =     25;
@@ -33,6 +35,8 @@ input [1:0] AES_ed_ENABLE;
 input iCLOCK50;
 input [15:0] ReadUse;
 input [15:0] WriteUse;
+input SDRAM_read;
+input SDRAM_write;
 
 output  [7:0]           c_state;		
 //=======================================================
@@ -181,7 +185,12 @@ begin
 		if(ReadUse == 0)
 			c_state <= 11;
 		else
-			c_state <= 4;
+			begin
+			if(SDRAM_read)
+				c_state <= 11;
+			else
+				c_state <= 4;
+			end
 		end
 	  	4 : begin //read
 	  			read <= 1;
@@ -311,7 +320,7 @@ begin
 				end
 				else
 				begin
-					if(wait_count < 8'b1000)
+					if(wait_count < 8'b10000)
 						wait_count <= wait_count + 1'b1;
 				end
 			end
@@ -326,7 +335,7 @@ begin
 				end
 				else
 				begin
-					if(wait_count < 8'b1000)
+					if(wait_count < 8'b10000)
 						wait_count <= wait_count + 1'b1;
 				end
 			end			
@@ -335,9 +344,14 @@ begin
 		100 : 
 		begin
 		if(WriteUse >= 9'h100)
-		c_state <= 100;
+			c_state <= 100;
 		else
-		c_state <= 101;
+			begin
+			if(SDRAM_write)
+				c_state <= 100;
+			else
+				c_state <= 101;
+			end
 	  	end
 		101 : begin //write
 	  		 

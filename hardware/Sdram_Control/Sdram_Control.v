@@ -34,7 +34,12 @@ module Sdram_Control(
         DQ,
         DQM,
 		  SDR_CLK,
-		  FPGA_SDRAM_OE
+		  FPGA_SDRAM_OE,
+		  write_side_fifo_rusedw,
+		  read_side_fifo_wusedw,
+		  SDRAM_READ,
+		  SDRAM_WRITE
+		  
         );
 
 
@@ -120,8 +125,8 @@ wire									  FPGA_SDRAM_OE;
 //	FIFO Control
 reg								OUT_VALID;				//Output data request to read side fifo
 reg								IN_REQ;					//Input	data request to write side fifo
-wire	[15:0]					write_side_fifo_rusedw;
-wire	[15:0]					read_side_fifo_wusedw;
+output wire	[15:0]					write_side_fifo_rusedw;
+output wire	[15:0]					read_side_fifo_wusedw;
 
 //	DRAM Internal Control
 wire    [`ASIZE-1:0]            saddr;
@@ -138,6 +143,8 @@ wire							init_req;
 wire							cm_ack;
 wire							active;
 output                  CLK;
+output SDRAM_READ;
+output SDRAM_WRITE;
 	
 sdram_pll0 sdram_pll0_inst(
 		.refclk(REF_CLK),   //  refclk.clk
@@ -261,6 +268,8 @@ end
 assign  DQ = oe ? DQOUT : `DSIZE'hzzzz;
 assign	active	=	Read | Write;
 assign FPGA_SDRAM_OE = oe;
+assign SDRAM_READ = Read;
+assign SDRAM_WRITE = Write;
 
 always@(posedge CLK or negedge RESET_N)
 begin
@@ -307,7 +316,7 @@ begin
 			end
 		default:	
 			begin	
-				if(ST!=SC_CL+SC_RCD+mLENGTH+1+2)
+				if(ST!=SC_CL+SC_RCD+mLENGTH+1)
 				ST<=ST+1;
 				else
 				ST<=0;
@@ -316,9 +325,9 @@ begin
 	
 		if(Read)
 		begin
-			if(ST==SC_CL+SC_RCD+1+2)
+			if(ST==SC_CL+SC_RCD+1)
 			OUT_VALID	<=	1;
-			else if(ST==SC_CL+SC_RCD+mLENGTH+1+2)
+			else if(ST==SC_CL+SC_RCD+mLENGTH+1)
 			begin
 				OUT_VALID	<=	0;
 				Read		<=	0;

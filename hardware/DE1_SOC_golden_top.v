@@ -403,19 +403,21 @@ Sdram_Control	u1	(	//	HOST Side
 							.WR(write),
 							.WR_ADDR(25'h0),
 							.WR_MAX_ADDR(25'h0+25'h80000),		//	525-18
-							.WR_LENGTH(9'h8),
+							.WR_LENGTH(9'h100),
 							.WR_LOAD(!test_global_reset_n ),
 							.WR_CLK(clk_test),
-							.WR_USE(writeuse),
+							.write_side_fifo_rusedw(writeuse),
+							.SDRAM_WRITE(sdram_write),
 							//	FIFO Read Side 
 						   .RD_DATA(readdata),
 				        	.RD(read),
 				        	.RD_ADDR(25'h0),			//	Read odd field and bypess blanking
 							.RD_MAX_ADDR(25'h0+25'h80000),
-							.RD_LENGTH(9'h8),
+							.RD_LENGTH(9'h100),
 				        	.RD_LOAD(!test_global_reset_n ),
 							.RD_CLK(clk_test),
-							.RD_USE(readuse),
+							.read_side_fifo_wusedw(readuse),
+							.SDRAM_READ(sdram_read),
                      //	SDRAM Side
 						   .SA(FPGA_DRAM_ADDR),
 						   .BA(FPGA_DRAM_BA),
@@ -444,6 +446,8 @@ wire test_sdram_hps;
 wire test_h2f_reset_n;
 wire [15:0] readuse;
 wire [15:0] writeuse;
+wire sdram_read;
+wire sdram_write;
 
  RW_Test u2(
       .iCLK(clk_test),
@@ -459,7 +463,9 @@ wire [15:0] writeuse;
 		.iCLOCK50(CLOCK_50),
 		.CHAOS_KEY({CODE_X,CODE_Y,CODE_Z,CODE_W}),
 		.ReadUse(readuse),
-		.WriteUse(writeuse)
+		.WriteUse(writeuse),
+		.SDRAM_read(sdram_read),
+		.SDRAM_write(sdram_write)
 );
 
 pll pll_u0(
