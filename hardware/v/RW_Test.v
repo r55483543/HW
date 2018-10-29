@@ -421,7 +421,7 @@ begin
 	  		end
 		end
 	  	104 : begin 
-				if(AES_write_count == 16'hc000)  //512*512*3/16
+				if(AES_write_count == 16'h10000)  //1MB
 					begin
 					c_state <= 105;
 					writedata <= 16'hffff;

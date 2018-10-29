@@ -401,9 +401,9 @@ Sdram_Control	u1	(	//	HOST Side
 							//	FIFO Write Side 
 						   .WR_DATA(writedata),
 							.WR(write),
-							.WR_ADDR(25'h0),
-							.WR_MAX_ADDR(25'h0+25'h80000),		//	525-18
-							.WR_LENGTH(9'h100),
+							.WR_ADDR(25'h80000),
+							.WR_MAX_ADDR(25'h80000+25'h80000),		//	525-18
+							.WR_LENGTH(9'h200),
 							.WR_LOAD(!test_global_reset_n ),
 							.WR_CLK(clk_test),
 							.write_side_fifo_rusedw(writeuse),
@@ -411,9 +411,9 @@ Sdram_Control	u1	(	//	HOST Side
 							//	FIFO Read Side 
 						   .RD_DATA(readdata),
 				        	.RD(read),
-				        	.RD_ADDR(25'h0),			//	Read odd field and bypess blanking
-							.RD_MAX_ADDR(25'h0+25'h80000),
-							.RD_LENGTH(9'h100),
+				        	.RD_ADDR(25'h0+25'h8),			//	Read odd field and bypess blanking
+							.RD_MAX_ADDR(25'h0+25'h80000+25'h8),
+							.RD_LENGTH(9'h200),
 				        	.RD_LOAD(!test_global_reset_n ),
 							.RD_CLK(clk_test),
 							.read_side_fifo_wusedw(readuse),
