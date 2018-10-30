@@ -71,7 +71,7 @@ begin
 		c_state <= 8'b0;
 		write <= 1'b0;
 		read <= 1'b0;
-		writedata<=16'b0;
+		writedata<={16{1'b0}};
 		wait_count <= 8'b0;
 		AES_write_count <= 16'b1;
 		AES_ed_DONE <= 2'b00;
@@ -358,7 +358,7 @@ begin
 	  		if (write_count[3])
 	  		begin
 	  		  write_count <= 5'b0;
-	  		  
+	  		  /*
 				if(address == 3'b000)
 				begin
 					writedata <= d_data_out[15:0];
@@ -394,7 +394,8 @@ begin
 				else
 				begin
 					writedata <= writedata;
-				end	
+				end*/	
+				
 				write <= 1'b1;				
 	  		  c_state <= 102;
 			  	
@@ -404,7 +405,7 @@ begin
 		 end
 	  	102 : begin //finish write one data
 	  		   write <= 1'b0;
-				
+				writedata <= writedata +1'b1;
 	  			c_state <= 103;
 	  		end
 	  	103 : begin
