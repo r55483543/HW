@@ -33,7 +33,7 @@ parameter	SC_BL		=	1;
 ////////////	100 MHz	///////////////
 parameter	INIT_PER	=	24000;
 parameter	REF_PER		=	1024;
-parameter	SC_CL		=	4; //20181016
+parameter	SC_CL		=	3; //20181016
 parameter	SC_RCD		=	3;
 parameter	SC_RRD		=	7;
 parameter	SC_PM		=	1;
