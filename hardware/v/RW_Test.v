@@ -59,7 +59,7 @@ assign max_address = &address[2:0];
 
 reg [127:0] e_data_in;
 reg [127:0] d_data_out;
-reg [15:0]  AES_write_count;
+reg [19:0]  AES_write_count;
 
 always@(posedge iCLK)
 begin
@@ -73,7 +73,7 @@ begin
 		read <= 1'b0;
 		writedata<={16{1'b0}};
 		wait_count <= 8'b0;
-		AES_write_count <= 16'b1;
+		AES_write_count <= 20'b1;
 		AES_ed_DONE <= 2'b00;
 	end
 	else
@@ -395,6 +395,43 @@ begin
 				begin
 					writedata <= writedata;
 				end*/	
+
+				if(address == 3'b000)
+				begin
+					writedata <= e_data_in[15:0];
+				end
+				else if(address == 3'b001)
+				begin
+					writedata <= e_data_in[31:16];
+				end
+				else if(address == 3'b010)
+				begin
+					writedata <= e_data_in[47:32];
+				end
+				else if(address == 3'b011)
+				begin
+					writedata <= e_data_in[63:48];
+				end
+				else if(address == 3'b100)
+				begin
+					writedata <= e_data_in[79:64];
+				end
+				else if(address == 3'b101)
+				begin
+					writedata <= e_data_in[95:80];
+				end
+				else if(address == 3'b110)
+				begin
+					writedata <= e_data_in[111:96];
+				end
+				else if(address == 3'b111)
+				begin
+					writedata <= e_data_in[127:112];
+				end
+				else
+				begin
+					writedata <= writedata;
+				end					
 				
 				write <= 1'b1;				
 	  		  c_state <= 102;
@@ -405,7 +442,7 @@ begin
 		 end
 	  	102 : begin //finish write one data
 	  		   write <= 1'b0;
-				writedata <= writedata +1'b1;
+				//writedata <= writedata +1'b1;
 	  			c_state <= 103;
 	  		end
 	  	103 : begin
@@ -422,7 +459,7 @@ begin
 	  		end
 		end
 	  	104 : begin 
-				if(AES_write_count == 16'h10000)  //1MB
+				if(AES_write_count == 20'h20000)  //1MB
 					begin
 					c_state <= 105;
 					writedata <= 16'hffff;
