@@ -358,7 +358,7 @@ begin
 	  		if (write_count[3])
 	  		begin
 	  		  write_count <= 5'b0;
-	  		  /*
+	  		  
 				if(address == 3'b000)
 				begin
 					writedata <= d_data_out[15:0];
@@ -394,8 +394,8 @@ begin
 				else
 				begin
 					writedata <= writedata;
-				end*/	
-
+				end
+/*
 				if(address == 3'b000)
 				begin
 					writedata <= e_data_in[15:0];
@@ -432,7 +432,7 @@ begin
 				begin
 					writedata <= writedata;
 				end					
-				
+*/				
 				write <= 1'b1;				
 	  		  c_state <= 102;
 			  	
@@ -459,7 +459,7 @@ begin
 	  		end
 		end
 	  	104 : begin 
-				if(AES_write_count == 20'h20000)  //1MB
+				if(AES_write_count == 20'h20040)  //1MB
 					begin
 					c_state <= 105;
 					writedata <= 16'hffff;
