@@ -92,6 +92,7 @@ module soc_system (
 		output wire        pio_chaos_reset_external_connection_export, // pio_chaos_reset_external_connection.export
 		output wire [31:0] pio_chaos_shift_external_connection_export, // pio_chaos_shift_external_connection.export
 		output wire        pio_chaos_step_external_connection_export,  //  pio_chaos_step_external_connection.export
+		output wire [31:0] pio_chaos_temp2_external_connection_export, // pio_chaos_temp2_external_connection.export
 		input  wire [12:0] pio_chaos_temp_external_connection_export,  //  pio_chaos_temp_external_connection.export
 		input  wire [31:0] pio_chaos_w_external_connection_export,     //     pio_chaos_w_external_connection.export
 		input  wire [31:0] pio_chaos_x_external_connection_export,     //     pio_chaos_x_external_connection.export
@@ -270,6 +271,11 @@ module soc_system (
 	wire   [31:0] mm_interconnect_1_pio_chaos_z_s1_writedata;             // mm_interconnect_1:pio_chaos_z_s1_writedata -> pio_chaos_z:writedata
 	wire   [31:0] mm_interconnect_1_pio_chaos_temp_s1_readdata;           // pio_chaos_temp:readdata -> mm_interconnect_1:pio_chaos_temp_s1_readdata
 	wire    [1:0] mm_interconnect_1_pio_chaos_temp_s1_address;            // mm_interconnect_1:pio_chaos_temp_s1_address -> pio_chaos_temp:address
+	wire          mm_interconnect_1_pio_chaos_temp2_s1_chipselect;        // mm_interconnect_1:pio_chaos_temp2_s1_chipselect -> pio_chaos_temp2:chipselect
+	wire   [31:0] mm_interconnect_1_pio_chaos_temp2_s1_readdata;          // pio_chaos_temp2:readdata -> mm_interconnect_1:pio_chaos_temp2_s1_readdata
+	wire    [1:0] mm_interconnect_1_pio_chaos_temp2_s1_address;           // mm_interconnect_1:pio_chaos_temp2_s1_address -> pio_chaos_temp2:address
+	wire          mm_interconnect_1_pio_chaos_temp2_s1_write;             // mm_interconnect_1:pio_chaos_temp2_s1_write -> pio_chaos_temp2:write_n
+	wire   [31:0] mm_interconnect_1_pio_chaos_temp2_s1_writedata;         // mm_interconnect_1:pio_chaos_temp2_s1_writedata -> pio_chaos_temp2:writedata
 	wire   [31:0] hps_0_f2h_irq0_irq;                                     // irq_mapper:sender_irq -> hps_0:f2h_irq_p0
 	wire   [31:0] hps_0_f2h_irq1_irq;                                     // irq_mapper_001:sender_irq -> hps_0:f2h_irq_p1
 	wire          log_generate_0_dout_valid;                              // LOG_Generate_0:dout_valid -> avalon_st_adapter:in_0_valid
@@ -285,7 +291,7 @@ module soc_system (
 	wire          avalon_st_adapter_out_0_endofpacket;                    // avalon_st_adapter:out_0_endofpacket -> timing_adapter_0:in_endofpacket
 	wire          rst_controller_reset_out_reset;                         // rst_controller:reset_out -> [LOG_Generate_0:reset, alt_vip_itc_0:rst, alt_vip_mix_0:reset, alt_vip_tpg_0:reset, alt_vip_vfr_0:reset, avalon_st_adapter:in_rst_0_reset, mm_interconnect_1:alt_vip_vfr_0_clock_reset_reset_reset_bridge_in_reset_reset, timing_adapter_0:reset_n]
 	wire          rst_controller_001_reset_out_reset;                     // rst_controller_001:reset_out -> [alt_vip_vfr_0:master_reset, mm_interconnect_0:alt_vip_vfr_0_clock_master_reset_reset_bridge_in_reset_reset, sdram:reset_n]
-	wire          rst_controller_002_reset_out_reset;                     // rst_controller_002:reset_out -> [mm_interconnect_1:pio_chaos_done_reset_reset_bridge_in_reset_reset, pio_chaos_done:reset_n, pio_chaos_reset:reset_n, pio_chaos_shift:reset_n, pio_chaos_step:reset_n, pio_chaos_temp:reset_n, pio_chaos_w:reset_n, pio_chaos_x:reset_n, pio_chaos_y:reset_n, pio_chaos_z:reset_n]
+	wire          rst_controller_002_reset_out_reset;                     // rst_controller_002:reset_out -> [mm_interconnect_1:pio_chaos_done_reset_reset_bridge_in_reset_reset, pio_chaos_done:reset_n, pio_chaos_reset:reset_n, pio_chaos_shift:reset_n, pio_chaos_step:reset_n, pio_chaos_temp2:reset_n, pio_chaos_temp:reset_n, pio_chaos_w:reset_n, pio_chaos_x:reset_n, pio_chaos_y:reset_n, pio_chaos_z:reset_n]
 	wire          rst_controller_003_reset_out_reset;                     // rst_controller_003:reset_out -> mm_interconnect_0:hps_0_h2f_axi_master_agent_clk_reset_reset_bridge_in_reset_reset
 	wire          rst_controller_004_reset_out_reset;                     // rst_controller_004:reset_out -> mm_interconnect_1:hps_0_h2f_lw_axi_master_agent_clk_reset_reset_bridge_in_reset_reset
 
@@ -637,6 +643,17 @@ module soc_system (
 		.in_port  (pio_chaos_temp_external_connection_export)     // external_connection.export
 	);
 
+	soc_system_pio_chaos_shift pio_chaos_temp2 (
+		.clk        (clk_clk),                                         //                 clk.clk
+		.reset_n    (~rst_controller_002_reset_out_reset),             //               reset.reset_n
+		.address    (mm_interconnect_1_pio_chaos_temp2_s1_address),    //                  s1.address
+		.write_n    (~mm_interconnect_1_pio_chaos_temp2_s1_write),     //                    .write_n
+		.writedata  (mm_interconnect_1_pio_chaos_temp2_s1_writedata),  //                    .writedata
+		.chipselect (mm_interconnect_1_pio_chaos_temp2_s1_chipselect), //                    .chipselect
+		.readdata   (mm_interconnect_1_pio_chaos_temp2_s1_readdata),   //                    .readdata
+		.out_port   (pio_chaos_temp2_external_connection_export)       // external_connection.export
+	);
+
 	soc_system_pio_chaos_w pio_chaos_w (
 		.clk        (clk_clk),                                     //                 clk.clk
 		.reset_n    (~rst_controller_002_reset_out_reset),         //               reset.reset_n
@@ -864,6 +881,11 @@ module soc_system (
 		.pio_chaos_step_s1_chipselect                                        (mm_interconnect_1_pio_chaos_step_s1_chipselect),         //                                                              .chipselect
 		.pio_chaos_temp_s1_address                                           (mm_interconnect_1_pio_chaos_temp_s1_address),            //                                             pio_chaos_temp_s1.address
 		.pio_chaos_temp_s1_readdata                                          (mm_interconnect_1_pio_chaos_temp_s1_readdata),           //                                                              .readdata
+		.pio_chaos_temp2_s1_address                                          (mm_interconnect_1_pio_chaos_temp2_s1_address),           //                                            pio_chaos_temp2_s1.address
+		.pio_chaos_temp2_s1_write                                            (mm_interconnect_1_pio_chaos_temp2_s1_write),             //                                                              .write
+		.pio_chaos_temp2_s1_readdata                                         (mm_interconnect_1_pio_chaos_temp2_s1_readdata),          //                                                              .readdata
+		.pio_chaos_temp2_s1_writedata                                        (mm_interconnect_1_pio_chaos_temp2_s1_writedata),         //                                                              .writedata
+		.pio_chaos_temp2_s1_chipselect                                       (mm_interconnect_1_pio_chaos_temp2_s1_chipselect),        //                                                              .chipselect
 		.pio_chaos_w_s1_address                                              (mm_interconnect_1_pio_chaos_w_s1_address),               //                                                pio_chaos_w_s1.address
 		.pio_chaos_w_s1_write                                                (mm_interconnect_1_pio_chaos_w_s1_write),                 //                                                              .write
 		.pio_chaos_w_s1_readdata                                             (mm_interconnect_1_pio_chaos_w_s1_readdata),              //                                                              .readdata

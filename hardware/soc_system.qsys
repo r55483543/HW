@@ -189,6 +189,14 @@
          type = "int";
       }
    }
+   element pio_chaos_temp2
+   {
+      datum _sortIndex
+      {
+         value = "21";
+         type = "int";
+      }
+   }
    element pio_chaos_w
    {
       datum _sortIndex
@@ -343,6 +351,11 @@
  <interface
    name="pio_chaos_step_external_connection"
    internal="pio_chaos_step.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="pio_chaos_temp2_external_connection"
+   internal="pio_chaos_temp2.external_connection"
    type="conduit"
    dir="end" />
  <interface
@@ -1080,6 +1093,24 @@
   <parameter name="width" value="13" />
  </module>
  <module
+   name="pio_chaos_temp2"
+   kind="altera_avalon_pio"
+   version="16.1"
+   enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="32" />
+ </module>
+ <module
    name="pio_chaos_w"
    kind="altera_avalon_pio"
    version="16.1"
@@ -1725,6 +1756,15 @@
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
+   kind="avalon"
+   version="16.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="pio_chaos_temp2.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0290" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
    kind="avalon_streaming"
    version="16.1"
    start="alt_vip_vfr_0.avalon_streaming_source"
@@ -1778,6 +1818,11 @@
    version="16.1"
    start="clk_0.clk"
    end="pio_chaos_temp.clk" />
+ <connection
+   kind="clock"
+   version="16.1"
+   start="clk_0.clk"
+   end="pio_chaos_temp2.clk" />
  <connection
    kind="clock"
    version="16.1"
@@ -1922,6 +1967,11 @@
    version="16.1"
    start="clk_0.clk_reset"
    end="pio_chaos_temp.reset" />
+ <connection
+   kind="reset"
+   version="16.1"
+   start="clk_0.clk_reset"
+   end="pio_chaos_temp2.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>

@@ -227,6 +227,7 @@ wire	 [31:0]	CODE_Y;
 wire	 [31:0]	CODE_Z;
 wire	 [31:0]	CODE_W;
 wire	 [12:0]	F2H;
+wire 	 [31:0]	SHIFT;
 
 //=======================================================
 //  Structural coding
@@ -342,13 +343,15 @@ soc_system u0 (
         .alt_vip_itc_0_clocked_video_vid_v         ( ),          //      
 			.pio_chaos_done_external_connection_export		( DONE),  //  pio_chaos_done_external_connection.export
 			.pio_chaos_reset_external_connection_export		( RESET), // pio_chaos_reset_external_connection.export
-			.pio_chaos_shift_external_connection_export		( H2F), // pio_chaos_shift_external_connection.export
+			.pio_chaos_shift_external_connection_export		( SHIFT), // pio_chaos_shift_external_connection.export
 			.pio_chaos_step_external_connection_export		( STEP),  //  pio_chaos_step_external_connection.export
 			.pio_chaos_w_external_connection_export			( CODE_W),     //     pio_chaos_w_external_connection.export
 			.pio_chaos_x_external_connection_export			( CODE_X),     //     pio_chaos_x_external_connection.export
 			.pio_chaos_y_external_connection_export			( CODE_Y),     //     pio_chaos_y_external_connection.export
 			.pio_chaos_z_external_connection_export			( CODE_Z),     //     pio_chaos_z_external_connection.export
 			.pio_chaos_temp_external_connection_export		( F2H),
+			.pio_chaos_temp2_external_connection_export(H2F), // pio_chaos_temp2_external_connection.export
+
 			.f2h_reset_n(test_h2f_reset_n)
 	 );
 assign  VGA_CLK=clk_148_5;	 

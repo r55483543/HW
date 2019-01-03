@@ -1,5 +1,5 @@
 Info: Starting: Create block symbol file (.bsf)
-Info: qsys-generate D:\OK\demo1_axi_640x480_0727OK\demo1_axi\hardware\soc_system.qsys --block-symbol-file --output-directory=D:\OK\demo1_axi_640x480_0727OK\demo1_axi\hardware\soc_system --family="Cyclone V" --part=5CSXFC6D6F31C6
+Info: qsys-generate C:\Quartus\demo1_axi_640x480_en-decrypt_OK\demo1_axi\hardware\soc_system.qsys --block-symbol-file --output-directory=C:\Quartus\demo1_axi_640x480_en-decrypt_OK\demo1_axi\hardware\soc_system --family="Cyclone V" --part=5CSXFC6D6F31C6
 Progress: Loading hardware/soc_system.qsys
 Progress: Reading input file
 Progress: Adding LOG_Generate_0 [LOG_Generate 1.0]
@@ -28,6 +28,8 @@ Progress: Adding pio_chaos_step [altera_avalon_pio 16.1]
 Progress: Parameterizing module pio_chaos_step
 Progress: Adding pio_chaos_temp [altera_avalon_pio 16.1]
 Progress: Parameterizing module pio_chaos_temp
+Progress: Adding pio_chaos_temp2 [altera_avalon_pio 16.1]
+Progress: Parameterizing module pio_chaos_temp2
 Progress: Adding pio_chaos_w [altera_avalon_pio 16.1]
 Progress: Parameterizing module pio_chaos_w
 Progress: Adding pio_chaos_x [altera_avalon_pio 16.1]
@@ -76,7 +78,7 @@ Info: qsys-generate succeeded.
 Info: Finished: Create block symbol file (.bsf)
 Info: 
 Info: Starting: Create HDL design files for synthesis
-Info: qsys-generate D:\OK\demo1_axi_640x480_0727OK\demo1_axi\hardware\soc_system.qsys --synthesis=VERILOG --output-directory=D:\OK\demo1_axi_640x480_0727OK\demo1_axi\hardware\soc_system\synthesis --family="Cyclone V" --part=5CSXFC6D6F31C6
+Info: qsys-generate C:\Quartus\demo1_axi_640x480_en-decrypt_OK\demo1_axi\hardware\soc_system.qsys --synthesis=VERILOG --output-directory=C:\Quartus\demo1_axi_640x480_en-decrypt_OK\demo1_axi\hardware\soc_system\synthesis --family="Cyclone V" --part=5CSXFC6D6F31C6
 Progress: Loading hardware/soc_system.qsys
 Progress: Reading input file
 Progress: Adding LOG_Generate_0 [LOG_Generate 1.0]
@@ -105,6 +107,8 @@ Progress: Adding pio_chaos_step [altera_avalon_pio 16.1]
 Progress: Parameterizing module pio_chaos_step
 Progress: Adding pio_chaos_temp [altera_avalon_pio 16.1]
 Progress: Parameterizing module pio_chaos_temp
+Progress: Adding pio_chaos_temp2 [altera_avalon_pio 16.1]
+Progress: Parameterizing module pio_chaos_temp2
 Progress: Adding pio_chaos_w [altera_avalon_pio 16.1]
 Progress: Parameterizing module pio_chaos_w
 Progress: Adding pio_chaos_x [altera_avalon_pio 16.1]
@@ -178,29 +182,29 @@ Warning: hps_0: "QSPI clock frequency" (desired_qspi_clk_mhz) requested 400.0 MH
 Warning: hps_0: 1 or more output clock frequencies cannot be achieved precisely, consider revising desired output clock frequencies.
 Info: hps_0: "soc_system" instantiated altera_hps "hps_0"
 Info: pio_chaos_done: Starting RTL generation for module 'soc_system_pio_chaos_done'
-Info: pio_chaos_done:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_done --dir=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0006_pio_chaos_done_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0006_pio_chaos_done_gen//soc_system_pio_chaos_done_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_chaos_done:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_done --dir=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0006_pio_chaos_done_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0006_pio_chaos_done_gen//soc_system_pio_chaos_done_component_configuration.pl  --do_build_sim=0  ]
 Info: pio_chaos_done: Done RTL generation for module 'soc_system_pio_chaos_done'
 Info: pio_chaos_done: "soc_system" instantiated altera_avalon_pio "pio_chaos_done"
 Info: pio_chaos_reset: Starting RTL generation for module 'soc_system_pio_chaos_reset'
-Info: pio_chaos_reset:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_reset --dir=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0007_pio_chaos_reset_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0007_pio_chaos_reset_gen//soc_system_pio_chaos_reset_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_chaos_reset:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_reset --dir=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0007_pio_chaos_reset_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0007_pio_chaos_reset_gen//soc_system_pio_chaos_reset_component_configuration.pl  --do_build_sim=0  ]
 Info: pio_chaos_reset: Done RTL generation for module 'soc_system_pio_chaos_reset'
 Info: pio_chaos_reset: "soc_system" instantiated altera_avalon_pio "pio_chaos_reset"
 Info: pio_chaos_shift: Starting RTL generation for module 'soc_system_pio_chaos_shift'
-Info: pio_chaos_shift:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_shift --dir=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0008_pio_chaos_shift_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0008_pio_chaos_shift_gen//soc_system_pio_chaos_shift_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_chaos_shift:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_shift --dir=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0008_pio_chaos_shift_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0008_pio_chaos_shift_gen//soc_system_pio_chaos_shift_component_configuration.pl  --do_build_sim=0  ]
 Info: pio_chaos_shift: Done RTL generation for module 'soc_system_pio_chaos_shift'
 Info: pio_chaos_shift: "soc_system" instantiated altera_avalon_pio "pio_chaos_shift"
 Info: pio_chaos_temp: Starting RTL generation for module 'soc_system_pio_chaos_temp'
-Info: pio_chaos_temp:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_temp --dir=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0009_pio_chaos_temp_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0009_pio_chaos_temp_gen//soc_system_pio_chaos_temp_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_chaos_temp:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_temp --dir=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0009_pio_chaos_temp_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0009_pio_chaos_temp_gen//soc_system_pio_chaos_temp_component_configuration.pl  --do_build_sim=0  ]
 Info: pio_chaos_temp: Done RTL generation for module 'soc_system_pio_chaos_temp'
 Info: pio_chaos_temp: "soc_system" instantiated altera_avalon_pio "pio_chaos_temp"
 Info: pio_chaos_w: Starting RTL generation for module 'soc_system_pio_chaos_w'
-Info: pio_chaos_w:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_w --dir=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0010_pio_chaos_w_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0010_pio_chaos_w_gen//soc_system_pio_chaos_w_component_configuration.pl  --do_build_sim=0  ]
+Info: pio_chaos_w:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=soc_system_pio_chaos_w --dir=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0010_pio_chaos_w_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0010_pio_chaos_w_gen//soc_system_pio_chaos_w_component_configuration.pl  --do_build_sim=0  ]
 Info: pio_chaos_w: Done RTL generation for module 'soc_system_pio_chaos_w'
 Info: pio_chaos_w: "soc_system" instantiated altera_avalon_pio "pio_chaos_w"
 Info: pll_sdram: "soc_system" instantiated altera_pll "pll_sdram"
 Info: pll_stream: "soc_system" instantiated altera_pll "pll_stream"
 Info: sdram: Starting RTL generation for module 'soc_system_sdram'
-Info: sdram:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=soc_system_sdram --dir=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0013_sdram_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/bach/AppData/Local/Temp/alt7772_6006975062228684244.dir/0013_sdram_gen//soc_system_sdram_component_configuration.pl  --do_build_sim=0  ]
+Info: sdram:   Generation command is [exec C:/intelfpga/16.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga/16.1/quartus/bin64/perl/lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin/europa -I C:/intelfpga/16.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga/16.1/quartus/sopc_builder/bin -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/intelfpga/16.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=soc_system_sdram --dir=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0013_sdram_gen/ --quartus_dir=C:/intelfpga/16.1/quartus --verilog --config=C:/Users/R55483~1/AppData/Local/Temp/alt7862_2029846988505298647.dir/0013_sdram_gen//soc_system_sdram_component_configuration.pl  --do_build_sim=0  ]
 Info: sdram: Done RTL generation for module 'soc_system_sdram'
 Info: sdram: "soc_system" instantiated altera_avalon_new_sdram_controller "sdram"
 Info: timing_adapter_0: "soc_system" instantiated timing_adapter "timing_adapter_0"
@@ -217,6 +221,7 @@ Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_009: Inserting error_adapter: error_adapter_0
 Info: avalon_st_adapter_010: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
 Info: mm_interconnect_1: "soc_system" instantiated altera_mm_interconnect "mm_interconnect_1"
 Info: irq_mapper: "soc_system" instantiated altera_irq_mapper "irq_mapper"
 Info: avalon_st_adapter: "soc_system" instantiated altera_avalon_st_adapter "avalon_st_adapter"
@@ -224,22 +229,22 @@ Info: rst_controller: "soc_system" instantiated altera_reset_controller "rst_con
 Info: to_output_wdata_muxinst: "alt_vip_mix_0" instantiated alt_cusp_muxhot16 "to_output_wdata_muxinst"
 Info: to_output: "alt_vip_mix_0" instantiated alt_fifo "to_output"
 Info: output_read_reg: "alt_vip_mix_0" instantiated alt_reg "output_read_reg"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: ispreviousendpacket_reg_d_muxinst: "alt_vip_mix_0" instantiated alt_cusp_muxbin2 "ispreviousendpacket_reg_d_muxinst"
 Info: ctrl_offset_au: "alt_vip_mix_0" instantiated alt_au "ctrl_offset_au"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: din_0: "alt_vip_mix_0" instantiated alt_avalon_st_input "din_0"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: dout: "alt_vip_mix_0" instantiated alt_avalon_st_output "dout"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: control: "alt_vip_mix_0" instantiated alt_avalon_mm_mem_slave "control"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: pc0: "alt_vip_mix_0" instantiated alt_pc "pc0"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: fu_id_4422_line479_65: "alt_vip_mix_0" instantiated alt_cmp "fu_id_4422_line479_65"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: clocksource: "alt_vip_mix_0" instantiated alt_cusp_testbench_clock "clocksource"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/alt_cusp161_package.vhd
 Info: fpga_interfaces: "hps_0" instantiated altera_interface_generator "fpga_interfaces"
 Info: hps_io: "hps_0" instantiated altera_hps_io "hps_io"
 Info: alt_vip_vfr_0_avalon_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "alt_vip_vfr_0_avalon_master_translator"
@@ -252,30 +257,30 @@ Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
 Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
 Info: router_003: "mm_interconnect_0" instantiated altera_merlin_router "router_003"
 Info: sdram_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "sdram_s1_burst_adapter"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
 Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
 Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
 Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: hps_0_h2f_axi_master_wr_rsp_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "hps_0_h2f_axi_master_wr_rsp_width_adapter"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
 Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: router: "mm_interconnect_1" instantiated altera_merlin_router "router"
 Info: router_002: "mm_interconnect_1" instantiated altera_merlin_router "router_002"
 Info: hps_0_h2f_lw_axi_master_wr_limiter: "mm_interconnect_1" instantiated altera_merlin_traffic_limiter "hps_0_h2f_lw_axi_master_wr_limiter"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
 Info: cmd_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "cmd_demux"
 Info: cmd_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "cmd_mux"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: rsp_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "rsp_demux"
 Info: rsp_demux_002: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "rsp_demux_002"
 Info: rsp_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "rsp_mux"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
 Info: crosser: "mm_interconnect_1" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
-Info: Reusing file D:/OK/demo1_axi_640x480_0727OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: Reusing file C:/Quartus/demo1_axi_640x480_en-decrypt_OK/demo1_axi/hardware/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
 Info: avalon_st_adapter: "mm_interconnect_1" instantiated altera_avalon_st_adapter "avalon_st_adapter"
 Info: data_format_adapter_0: "avalon_st_adapter" instantiated data_format_adapter "data_format_adapter_0"
 Info: timing_adapter_0: "avalon_st_adapter" instantiated timing_adapter "timing_adapter_0"

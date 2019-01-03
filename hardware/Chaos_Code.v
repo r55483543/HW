@@ -20,8 +20,8 @@ module Chaos_Code (
 
 reg				done = 0;
 reg	 [5:0]	count = 63;
-//reg	[31:0]	x = 32'h3f800000, y = 32'h3f800000, z = 32'h3f800000, w = 32'h3f800000;
-reg	[31:0]	x = 32'h0, y = 32'h0, z = 32'h0, w = 32'h0;
+reg	[31:0]	x = 32'h3f800000, y = 32'h3f800000, z = 32'h3f800000, w = 32'h3f800000;
+//reg	[31:0]	x = 32'h0, y = 32'h0, z = 32'h0, w = 32'h0;
 reg	[31:0]	a = 32'h3ecccccd, b = 32'h3f19999a, c = 32'h40400000, d = 32'h3f4ccccd, t = 32'h3c23d70a;
 //reg	[31:0]	s = 32'h3f800000;
 //reg	[31:0]	x_s = 32'h3d4ccccd, y_s = 32'h3d4ccccd, z_s = 32'h3d4ccccd, w_s = 32'h3d4ccccd;

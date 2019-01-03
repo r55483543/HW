@@ -358,7 +358,7 @@ begin
 	  		if (write_count[3])
 	  		begin
 	  		  write_count <= 5'b0;
-	  		  
+  		  
 				if(address == 3'b000)
 				begin
 					writedata <= d_data_out[15:0];
@@ -395,6 +395,7 @@ begin
 				begin
 					writedata <= writedata;
 				end
+	
 /*
 				if(address == 3'b000)
 				begin
@@ -432,7 +433,7 @@ begin
 				begin
 					writedata <= writedata;
 				end					
-*/				
+*/			
 				write <= 1'b1;				
 	  		  c_state <= 102;
 			  	

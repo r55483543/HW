@@ -88,6 +88,7 @@
 			pio_chaos_reset_external_connection_export : out   std_logic;                                        -- export
 			pio_chaos_shift_external_connection_export : out   std_logic_vector(31 downto 0);                    -- export
 			pio_chaos_step_external_connection_export  : out   std_logic;                                        -- export
+			pio_chaos_temp2_external_connection_export : out   std_logic_vector(31 downto 0);                    -- export
 			pio_chaos_temp_external_connection_export  : in    std_logic_vector(12 downto 0) := (others => 'X'); -- export
 			pio_chaos_w_external_connection_export     : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
 			pio_chaos_x_external_connection_export     : in    std_logic_vector(31 downto 0) := (others => 'X'); -- export
@@ -197,6 +198,7 @@
 			pio_chaos_reset_external_connection_export => CONNECTED_TO_pio_chaos_reset_external_connection_export, -- pio_chaos_reset_external_connection.export
 			pio_chaos_shift_external_connection_export => CONNECTED_TO_pio_chaos_shift_external_connection_export, -- pio_chaos_shift_external_connection.export
 			pio_chaos_step_external_connection_export  => CONNECTED_TO_pio_chaos_step_external_connection_export,  --  pio_chaos_step_external_connection.export
+			pio_chaos_temp2_external_connection_export => CONNECTED_TO_pio_chaos_temp2_external_connection_export, -- pio_chaos_temp2_external_connection.export
 			pio_chaos_temp_external_connection_export  => CONNECTED_TO_pio_chaos_temp_external_connection_export,  --  pio_chaos_temp_external_connection.export
 			pio_chaos_w_external_connection_export     => CONNECTED_TO_pio_chaos_w_external_connection_export,     --     pio_chaos_w_external_connection.export
 			pio_chaos_x_external_connection_export     => CONNECTED_TO_pio_chaos_x_external_connection_export,     --     pio_chaos_x_external_connection.export

@@ -88,6 +88,7 @@ module soc_system (
 	pio_chaos_reset_external_connection_export,
 	pio_chaos_shift_external_connection_export,
 	pio_chaos_step_external_connection_export,
+	pio_chaos_temp2_external_connection_export,
 	pio_chaos_temp_external_connection_export,
 	pio_chaos_w_external_connection_export,
 	pio_chaos_x_external_connection_export,
@@ -193,6 +194,7 @@ module soc_system (
 	output		pio_chaos_reset_external_connection_export;
 	output	[31:0]	pio_chaos_shift_external_connection_export;
 	output		pio_chaos_step_external_connection_export;
+	output	[31:0]	pio_chaos_temp2_external_connection_export;
 	input	[12:0]	pio_chaos_temp_external_connection_export;
 	input	[31:0]	pio_chaos_w_external_connection_export;
 	input	[31:0]	pio_chaos_x_external_connection_export;

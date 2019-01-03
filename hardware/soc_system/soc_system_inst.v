@@ -87,6 +87,7 @@
 		.pio_chaos_reset_external_connection_export (<connected-to-pio_chaos_reset_external_connection_export>), // pio_chaos_reset_external_connection.export
 		.pio_chaos_shift_external_connection_export (<connected-to-pio_chaos_shift_external_connection_export>), // pio_chaos_shift_external_connection.export
 		.pio_chaos_step_external_connection_export  (<connected-to-pio_chaos_step_external_connection_export>),  //  pio_chaos_step_external_connection.export
+		.pio_chaos_temp2_external_connection_export (<connected-to-pio_chaos_temp2_external_connection_export>), // pio_chaos_temp2_external_connection.export
 		.pio_chaos_temp_external_connection_export  (<connected-to-pio_chaos_temp_external_connection_export>),  //  pio_chaos_temp_external_connection.export
 		.pio_chaos_w_external_connection_export     (<connected-to-pio_chaos_w_external_connection_export>),     //     pio_chaos_w_external_connection.export
 		.pio_chaos_x_external_connection_export     (<connected-to-pio_chaos_x_external_connection_export>),     //     pio_chaos_x_external_connection.export
